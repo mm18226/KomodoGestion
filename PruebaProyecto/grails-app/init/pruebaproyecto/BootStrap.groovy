@@ -1,5 +1,5 @@
 package pruebaproyecto
-import pruebaproyecto.User
+import pruebaproyecto.Usuario
 import pruebaproyecto.UserRole
 import pruebaproyecto.Role
 

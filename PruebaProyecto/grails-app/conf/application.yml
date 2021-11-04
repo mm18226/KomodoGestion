@@ -110,7 +110,7 @@ environments:
             driverClassName: oracle.jdbc.OracleDriver
             username: komodo
             password: komodo
-            dbCreate: create-drop
+            dbCreate: update
             url: jdbc:oracle:thin:@//localhost:1521/XE
     test:
         dataSource:
