@@ -2,6 +2,7 @@ package pruebaproyecto
 
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
+import grails.plugin.springsecurity.annotation.Secured
 
 class EmpleadoController {
 
@@ -9,19 +10,23 @@ class EmpleadoController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond empleadoService.list(params), model:[empleadoCount: empleadoService.count()]
     }
 
+    @Secured(['ROLE_ADMIN', 'ROLE_USER'])
     def show(Long id) {
         respond empleadoService.get(id)
     }
 
+    @Secured('ROLE_ADMIN')
     def create() {
         respond new Empleado(params)
     }
 
+    @Secured('ROLE_ADMIN')
     def save(Empleado empleado) {
         if (empleado == null) {
             notFound()
@@ -44,10 +49,12 @@ class EmpleadoController {
         }
     }
 
+    @Secured('ROLE_ADMIN')
     def edit(Long id) {
         respond empleadoService.get(id)
     }
 
+    @Secured('ROLE_ADMIN')
     def update(Empleado empleado) {
         if (empleado == null) {
             notFound()
@@ -70,6 +77,7 @@ class EmpleadoController {
         }
     }
 
+    @Secured('ROLE_ADMIN')
     def delete(Long id) {
         if (id == null) {
             notFound()
