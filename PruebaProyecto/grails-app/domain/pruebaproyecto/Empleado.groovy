@@ -18,6 +18,7 @@ class Empleado {
     Departamento departamento
     PuestoTrabajo puestoTrabajo
     AreaDeTrabajo areaTrabajo
+    Role role
 
     static constraints = {
         nombres blank:false,matches:"[a-zA-Z-' ']+"
@@ -34,6 +35,7 @@ class Empleado {
         nup blank:false,matches:"[0-9]{13}"
         areaTrabajo  blank:false
         puestoTrabajo  blank:false
+        role blank:false
     }
 
         static mapping={

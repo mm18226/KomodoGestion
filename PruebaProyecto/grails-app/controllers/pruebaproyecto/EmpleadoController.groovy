@@ -9,6 +9,7 @@ class EmpleadoController {
 
     EmpleadoService empleadoService
     UsuarioService usuarioService
+    UserRoleService userRoleService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -72,8 +73,11 @@ def createUsuario(Empleado empleado){
         boolean habilitado=true
         String nombre=empleado.nombres
         //Creando el usuario y guardandolo.
-        Usuario usuario= new Usuario(username:nomUsuario,password:contra,fullname:nombre) 
-            usuarioService.save(usuario)        
+        Usuario usuario= new Usuario(username:nomUsuario,password:contra,fullname:nombre, enabled:false) 
+            usuarioService.save(usuario)  
+       
+        UserRole userRole=new UserRole(user:usuario, role:empleado.role)
+            userRoleService.save(userRole)     
 
     }
     
