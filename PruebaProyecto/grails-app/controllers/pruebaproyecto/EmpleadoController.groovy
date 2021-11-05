@@ -3,6 +3,7 @@ package pruebaproyecto
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 import grails.plugin.springsecurity.annotation.Secured
+import pruebaproyecto.Usuario
 
 class EmpleadoController {
 
@@ -35,6 +36,7 @@ class EmpleadoController {
 
         try {
             empleadoService.save(empleado)
+            createUsuario(empleado)
         } catch (ValidationException e) {
             respond empleado.errors, view:'create'
             return
@@ -48,6 +50,28 @@ class EmpleadoController {
             '*' { respond empleado, [status: CREATED] }
         }
     }
+    
+    @Secured('ROLE_ADMIN')
+    def createUsuario(Empleado empleado){
+        String nomUsuario
+        nomUsuario = empleado.nombres.charAt(0)
+        nomUsuario+=empleado.apellidos.charAt(0)
+        nomUsuario+=empleado.dui.charAt(0)
+        nomUsuario+=empleado.dui.charAt(1)
+        nomUsuario+=empleado.dui.charAt(2)
+        String contra
+        contra="123"
+        boolean bloq=false
+        boolean accoExp=false
+        boolean passExp=false
+        boolean habilitado=true
+        String nombre=empleado.nombres+ " "+empleado.apellidos
+        new Usuario(username:nomUsuario, password:contra,  fullname:nombre).save()
+        
+        
+        
+    }
+    
 
     @Secured('ROLE_ADMIN')
     def edit(Long id) {
