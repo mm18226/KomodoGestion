@@ -8,6 +8,7 @@ import pruebaproyecto.Usuario
 class EmpleadoController {
 
     EmpleadoService empleadoService
+    UsuarioService usuarioService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -35,7 +36,8 @@ class EmpleadoController {
         }
 
         try {
-            empleadoService.save(empleado)
+            empleadoService.save(empleado) 
+            //aqui va 
             createUsuario(empleado)
         } catch (ValidationException e) {
             respond empleado.errors, view:'create'
@@ -51,9 +53,12 @@ class EmpleadoController {
         }
     }
     
-    @Secured('ROLE_ADMIN')
-    def createUsuario(Empleado empleado){
+@Secured('ROLE_ADMIN')    
+def createUsuario(Empleado empleado){
+    
+        //Creando los valores del usuario. 
         String nomUsuario
+
         nomUsuario = empleado.nombres.charAt(0)
         nomUsuario+=empleado.apellidos.charAt(0)
         nomUsuario+=empleado.dui.charAt(0)
@@ -65,11 +70,11 @@ class EmpleadoController {
         boolean accoExp=false
         boolean passExp=false
         boolean habilitado=true
-        String nombre=empleado.nombres+ " "+empleado.apellidos
-        new Usuario(username:nomUsuario, password:contra,  fullname:nombre).save()
-        
-        
-        
+        String nombre=empleado.nombres
+        //Creando el usuario y guardandolo.
+        Usuario usuario= new Usuario(username:nomUsuario,password:contra,fullname:nombre) 
+            usuarioService.save(usuario)        
+
     }
     
 
