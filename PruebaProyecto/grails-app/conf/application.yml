@@ -138,3 +138,15 @@ environments:
                 testOnReturn: false
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+
+grails:
+     mail:
+          host: 'smtp.gmail.com'
+          port: 465
+          username: 'komdotoo@gmail.com'
+          password: 'Komodo123'
+          props:
+              mail.smtp.auth: 'true'
+              mail.smtp.socketFactory.port: '465'
+              mail.smtp.socketFactory.class: 'javax.net.ssl.SSLSocketFactory'
+              mail.smtp.socketFactory.fallback: 'false'

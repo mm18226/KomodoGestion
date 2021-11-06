@@ -28,3 +28,4 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 
 grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/empleado'
 
+
