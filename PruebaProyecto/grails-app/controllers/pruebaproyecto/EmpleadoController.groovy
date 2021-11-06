@@ -76,7 +76,7 @@ def createUsuario(Empleado empleado){
         boolean habilitado=true
         String nombre=empleado.nombres
         //Creando el usuario y guardandolo.
-        Usuario usuario= new Usuario(username:nomUsuario,fullname:nombre,password:'123', enabled:false, dui:empleado.dui, correo:'JohnDoe@gmail.com', telefono:'12') 
+        Usuario usuario= new Usuario(id:empleado.id, username:nomUsuario,fullname:nombre,password:'123', enabled:false, dui:empleado.dui, correo:'JohnDoe@gmail.com', telefono:'12') 
             usuarioService.save(usuario)  
        
         UserRole userRole=new UserRole(user:usuario, role:empleado.role)
@@ -121,7 +121,12 @@ def createUsuario(Empleado empleado){
             return
         }
 
+        def empleado=Empleado.findById(id)
+        def usuario=Usuario.findByDui(empleado.dui)
+        usuario.enabled=false
         empleadoService.delete(id)
+        
+        
 
         request.withFormat {
             form multipartForm {

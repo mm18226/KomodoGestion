@@ -100,16 +100,13 @@ hibernate:
 dataSource:
     pooled: true
     jmxExport: true
-    driverClassName: org.h2.Driver
-    username: sa
-    password: ''
+    driverClassName: oracle.jdbc.OracleDriver
+    username: komodo
+    password: komodo
 
 environments:
     development:
         dataSource:
-            driverClassName: oracle.jdbc.OracleDriver
-            username: komodo
-            password: komodo
             dbCreate: update
             url: jdbc:oracle:thin:@//localhost:1521/XE
     test:
@@ -143,7 +140,7 @@ grails:
      mail:
           host: 'smtp.gmail.com'
           port: 465
-          username: 'komdotoo@gmail.com'
+          username: 'komodotoo@gmail.com'
           password: 'Komodo123'
           props:
               mail.smtp.auth: 'true'

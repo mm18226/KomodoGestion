@@ -10,12 +10,13 @@ import grails.compiler.GrailsCompileStatic
 class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1
-
+    int id
     String username
     String password
     boolean enabled = true
+    boolean registrado = false
     boolean accountExpired
-    boolean accountLocked
+    boolean accountLocked=false
     boolean passwordExpired
     String fullname
     String correo 

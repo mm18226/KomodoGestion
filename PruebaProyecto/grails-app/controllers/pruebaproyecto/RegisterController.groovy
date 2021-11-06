@@ -21,16 +21,17 @@ class RegisterController {
         
 
         contra=getPassword(MINUSCULAS+MAYUSCULAS+ESPECIALES,10)
-
-
-        try {
         def usuario = Usuario.findByDui(params.dui)
-        user=usuario
-        usuario.enabled=true
-        usuario.password=contra
-        usuario.correo=params.email
-        usuario.telefono=params.telefono
-        send()
+        if(usuario.registrado==false){
+            try {
+        
+            user=usuario
+            usuario.enabled=true
+            usuario.password=contra
+            usuario.correo=params.email
+            usuario.telefono=params.telefono
+            usuario.registrado=true
+            send()
         
                     UserRole.withSession {
                       it.flush()
@@ -42,10 +43,15 @@ class RegisterController {
  
 
         } catch (ValidationException e) {
-                flash.message = "Register Failed, su dui no existe"
+                flash.message = "Register fallo, su dui no existe"
                 redirect action: "index"
                 return
             }
+        }else{
+            flash.message = "El dui de este usuario ya a sido registrado"
+            redirect action: "index"
+            return
+        }
 
        
 
