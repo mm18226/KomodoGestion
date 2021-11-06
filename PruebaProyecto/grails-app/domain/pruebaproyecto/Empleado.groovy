@@ -30,7 +30,7 @@ class Empleado {
         municipio blank: false
         direccion blank: false
         salario blank:false, scale:2
-        dui blank:false,matches:"[0-9]{9}"
+        dui blank:false,matches:"[0-9]{9}", unique:true
         isss blank:false,matches:"[0-9]{9}"
         nup blank:false,matches:"[0-9]{13}"
         areaTrabajo  blank:false

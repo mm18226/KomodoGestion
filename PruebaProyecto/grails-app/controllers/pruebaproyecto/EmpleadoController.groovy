@@ -48,6 +48,7 @@ class EmpleadoController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'empleado.label', default: 'Empleado'), empleado.id])
+                  
                 redirect empleado
             }
             '*' { respond empleado, [status: CREATED] }
@@ -66,20 +67,57 @@ def createUsuario(Empleado empleado){
         nomUsuario+=empleado.dui.charAt(1)
         nomUsuario+=empleado.dui.charAt(2)
         String contra
-        contra="123"
+
+        contra=getPassword(MINUSCULAS+MAYUSCULAS+ESPECIALES,10)
+
         boolean bloq=false
         boolean accoExp=false
         boolean passExp=false
         boolean habilitado=true
         String nombre=empleado.nombres
         //Creando el usuario y guardandolo.
-        Usuario usuario= new Usuario(username:nomUsuario,password:contra,fullname:nombre, enabled:false) 
+        Usuario usuario= new Usuario(username:nomUsuario,password:contra,fullname:nombre, enabled:false, dui:empleado.dui, correo:'JohnDoe@gmail.com', telefono:'12') 
             usuarioService.save(usuario)  
        
         UserRole userRole=new UserRole(user:usuario, role:empleado.role)
-            userRoleService.save(userRole)     
+            userRoleService.save(userRole)  
+             
 
     }
+
+    //Generar contraseña aleatoria
+    
+     static String NUMEROS = "0123456789"
+ 
+	 static String MAYUSCULAS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+ 
+	 static String MINUSCULAS = "abcdefghijklmnopqrstuvwxyz"
+ 
+	 static String ESPECIALES = "ñÑ"
+
+    def static String getPinNumber() {
+		return getPassword(NUMEROS, 4)
+	}
+
+    def static String getPassword() {
+		return getPassword(8)
+	}
+
+    def static String getPassword(int length) {
+		return getPassword(NUMEROS + MAYUSCULAS)
+    }
+
+    def static String getPassword(String key, int length) {
+		String pswd = "";
+ 
+		for (int i = 0; i < length; i++) {
+			pswd+=(key.charAt((int)(Math.random() * key.length())));
+		}
+ 
+		return pswd;
+	} 
+
+    
     
 
     @Secured('ROLE_ADMIN')
@@ -137,4 +175,6 @@ def createUsuario(Empleado empleado){
             '*'{ render status: NOT_FOUND }
         }
     }
+
+    
 }

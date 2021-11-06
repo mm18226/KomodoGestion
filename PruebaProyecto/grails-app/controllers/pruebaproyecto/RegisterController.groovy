@@ -16,6 +16,28 @@ class RegisterController {
     def index() { }
 
     def register() {
+        try {
+        def usuario = Usuario.findByDui(params.dui)
+        usuario.enabled=true
+        usuario.correo=params.email
+        usuario.telefono=params.telefono
+        
+                    UserRole.withSession {
+                      it.flush()
+                      it.clear()
+                    }
+        flash.message = "Su usuario a sido habilita y sus credenciales enviadas a su correo."
+                    redirect controller: "login", action: "auth"
+        
+ 
+
+        } catch (ValidationException e) {
+                flash.message = "Register Failed, su dui no existe"
+                redirect action: "index"
+                return
+            }
+       
+       /*
         if(!params.password.equals(params.repassword)) {
             flash.message = "Password and Re-Password not match"
             redirect action: "index"
@@ -44,6 +66,7 @@ class RegisterController {
                 redirect action: "index"
                 return
             }
-        }
+        } */
+        
     }
 }

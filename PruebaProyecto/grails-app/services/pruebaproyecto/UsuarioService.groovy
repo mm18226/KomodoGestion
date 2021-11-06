@@ -6,6 +6,7 @@ import grails.gorm.services.Service
 interface UsuarioService {
 
     Usuario get(Serializable id)
+   // Usuario getDui(Serializable dui)
 
     List<Usuario> list(Map args)
 
