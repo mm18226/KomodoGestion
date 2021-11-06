@@ -41,6 +41,7 @@ class Usuario implements Serializable {
          
         version false
 	    password column: '`password`'
+
     }
 
        

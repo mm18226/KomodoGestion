@@ -16,9 +16,15 @@ class RegisterController {
     def index() { }
 
     def register() {
+        String contra
+
+        contra=getPassword(MINUSCULAS+MAYUSCULAS+ESPECIALES,10)
+
+
         try {
         def usuario = Usuario.findByDui(params.dui)
         usuario.enabled=true
+        usuario.password=contra
         usuario.correo=params.email
         usuario.telefono=params.telefono
         
@@ -36,6 +42,10 @@ class RegisterController {
                 redirect action: "index"
                 return
             }
+
+       
+
+
        
        /*
         if(!params.password.equals(params.repassword)) {
@@ -69,4 +79,36 @@ class RegisterController {
         } */
         
     }
+
+     //Generar contraseña aleatoria
+    
+     static String NUMEROS = "0123456789"
+ 
+	 static String MAYUSCULAS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+ 
+	 static String MINUSCULAS = "abcdefghijklmnopqrstuvwxyz"
+ 
+	 static String ESPECIALES = "ñÑ"
+
+    def static String getPinNumber() {
+		return getPassword(NUMEROS, 4)
+	}
+
+    def static String getPassword() {
+		return getPassword(8)
+	}
+
+    def static String getPassword(int length) {
+		return getPassword(NUMEROS + MAYUSCULAS)
+    }
+
+    def static String getPassword(String key, int length) {
+		String pswd = "";
+ 
+		for (int i = 0; i < length; i++) {
+			pswd+=(key.charAt((int)(Math.random() * key.length())));
+		}
+ 
+		return pswd;
+	} 
 }

@@ -75,6 +75,7 @@ dependencies {
 
     implementation group: 'com.oracle.database.jdbc', name: 'ojdbc8', version: '21.3.0.0'
     compile "org.grails.plugins:spring-security-core:4.0.0.RC2"
+    //compile ":mail:1.0.7"
 
 }
 

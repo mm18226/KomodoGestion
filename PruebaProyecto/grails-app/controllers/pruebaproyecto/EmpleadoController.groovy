@@ -66,9 +66,9 @@ def createUsuario(Empleado empleado){
         nomUsuario+=empleado.dui.charAt(0)
         nomUsuario+=empleado.dui.charAt(1)
         nomUsuario+=empleado.dui.charAt(2)
-        String contra
+        //String contra
 
-        contra=getPassword(MINUSCULAS+MAYUSCULAS+ESPECIALES,10)
+        //contra=getPassword(MINUSCULAS+MAYUSCULAS+ESPECIALES,10)
 
         boolean bloq=false
         boolean accoExp=false
@@ -76,7 +76,7 @@ def createUsuario(Empleado empleado){
         boolean habilitado=true
         String nombre=empleado.nombres
         //Creando el usuario y guardandolo.
-        Usuario usuario= new Usuario(username:nomUsuario,password:contra,fullname:nombre, enabled:false, dui:empleado.dui, correo:'JohnDoe@gmail.com', telefono:'12') 
+        Usuario usuario= new Usuario(username:nomUsuario,fullname:nombre,password:'123', enabled:false, dui:empleado.dui, correo:'JohnDoe@gmail.com', telefono:'12') 
             usuarioService.save(usuario)  
        
         UserRole userRole=new UserRole(user:usuario, role:empleado.role)
@@ -85,40 +85,6 @@ def createUsuario(Empleado empleado){
 
     }
 
-    //Generar contraseña aleatoria
-    
-     static String NUMEROS = "0123456789"
- 
-	 static String MAYUSCULAS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
- 
-	 static String MINUSCULAS = "abcdefghijklmnopqrstuvwxyz"
- 
-	 static String ESPECIALES = "ñÑ"
-
-    def static String getPinNumber() {
-		return getPassword(NUMEROS, 4)
-	}
-
-    def static String getPassword() {
-		return getPassword(8)
-	}
-
-    def static String getPassword(int length) {
-		return getPassword(NUMEROS + MAYUSCULAS)
-    }
-
-    def static String getPassword(String key, int length) {
-		String pswd = "";
- 
-		for (int i = 0; i < length; i++) {
-			pswd+=(key.charAt((int)(Math.random() * key.length())));
-		}
- 
-		return pswd;
-	} 
-
-    
-    
 
     @Secured('ROLE_ADMIN')
     def edit(Long id) {
