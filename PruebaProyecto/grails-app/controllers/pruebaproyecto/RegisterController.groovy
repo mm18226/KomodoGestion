@@ -5,13 +5,17 @@ import grails.gorm.transactions.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 import pruebaproyecto.Usuario
 import pruebaproyecto.Role
-import pruebaproyecto.UserRole
+
+
+
+import grails.plugin.springsecurity.SpringSecurityService
 
 @Transactional
 @Secured('permitAll')
 class RegisterController {
 
     static allowedMethods = [register: "POST"]
+    def springSecurityService
 
     def index() { }
     String contra
@@ -21,6 +25,7 @@ class RegisterController {
         
 
         contra=getPassword(MINUSCULAS+MAYUSCULAS+ESPECIALES,10)
+        
         def usuario = Usuario.findByDui(params.dui)
         if(usuario.registrado==false){
             try {
@@ -133,4 +138,34 @@ class RegisterController {
     flash.message = "Message sent at "+new Date()
     
 }
+
+//enviar A2F
+  def emailRegister(){
+      
+
+    def principal = springSecurityService.principal
+      String dui = principal.dui
+      def usuario=Usuario.findByDui(dui)
+
+ 
+      sendCodigo( usuario)
+
+  }
+
+
+  def sendCodigo(Usuario usuario) {
+      String codigo=getPassword(MINUSCULAS+MAYUSCULAS+ESPECIALES,10)
+      usuario.codigoA2F=codigo
+    sendMail {
+        to usuario.correo
+        subject 'Codigo A2F Komodo'
+        text 'Tu codigo A2F es: '+ codigo
+    }
+
+    flash.message = "Revise su correo"
+    redirect controller: "email", action: "index"
+    
+}
+
+
 }

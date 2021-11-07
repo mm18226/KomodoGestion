@@ -22,6 +22,7 @@ class Usuario implements Serializable {
     String correo 
     String telefono
     String dui
+    String codigoA2F
 
 
     Set<Role> getAuthorities() {
@@ -35,6 +36,7 @@ class Usuario implements Serializable {
         dui unique:true, blank: true, nullable:true
         correo email:true, blank:true, nullable:true
         telefono  blank:true, nullable:true
+        codigoA2F blank:true, nullable:true
     
     }
 
