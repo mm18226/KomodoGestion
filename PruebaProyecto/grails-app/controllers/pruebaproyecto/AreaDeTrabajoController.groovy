@@ -2,26 +2,30 @@ package pruebaproyecto
 
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
+import grails.plugin.springsecurity.annotation.Secured
 
 class AreaDeTrabajoController {
 
     AreaDeTrabajoService areaDeTrabajoService
-
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    @Secured ('ROLE_ADMIN')
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond areaDeTrabajoService.list(params), model:[areaDeTrabajoCount: areaDeTrabajoService.count()]
     }
 
+    @Secured ('ROLE_ADMIN')
     def show(Long id) {
         respond areaDeTrabajoService.get(id)
     }
 
+    @Secured ('ROLE_ADMIN')
     def create() {
         respond new AreaDeTrabajo(params)
     }
 
+    @Secured ('ROLE_ADMIN')
     def save(AreaDeTrabajo areaDeTrabajo) {
         if (areaDeTrabajo == null) {
             notFound()
@@ -44,10 +48,12 @@ class AreaDeTrabajoController {
         }
     }
 
+    @Secured ('ROLE_ADMIN')
     def edit(Long id) {
         respond areaDeTrabajoService.get(id)
     }
 
+    @Secured ('ROLE_ADMIN')
     def update(AreaDeTrabajo areaDeTrabajo) {
         if (areaDeTrabajo == null) {
             notFound()
@@ -70,6 +76,7 @@ class AreaDeTrabajoController {
         }
     }
 
+    @Secured ('ROLE_ADMIN')
     def delete(Long id) {
         if (id == null) {
             notFound()
@@ -86,6 +93,7 @@ class AreaDeTrabajoController {
             '*'{ render status: NO_CONTENT }
         }
     }
+
 
     protected void notFound() {
         request.withFormat {
