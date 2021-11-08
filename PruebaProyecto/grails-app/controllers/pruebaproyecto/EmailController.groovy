@@ -35,6 +35,7 @@ def springSecurityService
                         redirect controller: "cambiarContra", action: "index" 
 
                     }else{
+                        
                    redirect controller: "empleado", action: "index" 
                     }
         } 
