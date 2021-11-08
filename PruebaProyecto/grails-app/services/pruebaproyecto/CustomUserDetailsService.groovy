@@ -40,6 +40,6 @@ class CustomUserDetailsService implements GrailsUserDetailsService {
       return new CustomUserDetails(user.username, user.password, user.enabled,
             !user.accountExpired, !user.passwordExpired,
             !user.accountLocked, authorities ?: NO_ROLES, user.id,
-            user.fullname, user.dui, user.codigoA2F)
+            user.fullname, user.dui, user.codigoA2F, user.primeraV)
    }
 }

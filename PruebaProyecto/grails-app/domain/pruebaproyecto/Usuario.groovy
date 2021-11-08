@@ -16,8 +16,10 @@ class Usuario implements Serializable {
     boolean enabled = true
     boolean registrado = false
     boolean accountExpired
-    boolean accountLocked=false
+    boolean accountLocked = false
     boolean passwordExpired
+
+    boolean primeraV = true
     String fullname
     String correo 
     String telefono
@@ -37,6 +39,7 @@ class Usuario implements Serializable {
         correo email:true, blank:true, nullable:true
         telefono  blank:true, nullable:true
         codigoA2F blank:true, nullable:true
+
     
     }
 

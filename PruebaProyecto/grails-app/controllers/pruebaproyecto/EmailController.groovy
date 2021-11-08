@@ -30,7 +30,13 @@ def springSecurityService
       def usuario=Usuario.findByDui(dui)
       String cod=params.codigo
       if(cod.equals(usuario.codigoA2F)) {
+                    if(usuario.primeraV==true){
+                        flash.message = "La contraseña debe tener entre 12 y 16 caracteres, al menos 1 digito, al menos 1 mayuscula, al menos una minuscula y un caracter especial"
+                        redirect controller: "cambiarContra", action: "index" 
+
+                    }else{
                    redirect controller: "empleado", action: "index" 
+                    }
         } 
         else {
            flash.message = "El codigo no es correcto "

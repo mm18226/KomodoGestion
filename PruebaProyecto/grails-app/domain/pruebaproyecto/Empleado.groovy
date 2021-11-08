@@ -14,8 +14,7 @@ class Empleado {
     String nup
     String isss
 
-    Municipio municipio
-    Departamento departamento
+   
     PuestoTrabajo puestoTrabajo
     AreaDeTrabajo areaTrabajo
     Role role
@@ -26,8 +25,6 @@ class Empleado {
         fechaNacimiento blank:false 
         genero blank:false,matches:"[a-zA-Z-' ']+"
         estadoCivil blank:false,matches:"[a-zA-Z-' ']+"
-        departamento blank:false
-        municipio blank: false
         direccion blank: false
         salario blank:false, scale:2
         dui blank:false,matches:"[0-9]{9}", unique:true
