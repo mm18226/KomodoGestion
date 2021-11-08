@@ -23,7 +23,7 @@
 
             <div class="form-group">
                     <label for="username">Dui</label>
-              <input type="text" placeholder="Ingrese su DUI" class="form-control" name="dui" id="dui" autocapitalize="none"/>
+              <input type="text" placeholder="Ingrese su DUI" class="form-control" name="dui" id="dui" autocapitalize="none" pattern="[0-9]{9}"/>
             </div>
 
             <div class="form-group">
