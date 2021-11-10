@@ -17,7 +17,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark navbar-static-top" role="navigation">
-    <a class="navbar-brand" href="/empleado/index"><asset:image src="komodoLog.png" alt="Komodo Logo" style="max-width:30%;width:auto;height:auto; margin:auto;"/></a>
+    <a class="navbar-brand" ><asset:image src="komodoLog.png" alt="Komodo Logo" style="max-width:30%;width:auto;height:auto; margin:auto;"/></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>

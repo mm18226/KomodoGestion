@@ -132,7 +132,7 @@ class RegisterController {
     sendMail {
         to params.email
         subject 'Credenciales de inicio de sesión'
-        text 'Tus datos de inicio de sesion son '+'\n'+'Usuario: '+user.username+'\n'+'Contraseña: '+ contra
+        text 'Tus datos de inicio de sesion son '+'\n'+'Usuario: '+user.username+'\n'+'Contraseña provisional: '+ contra
     }
 
     flash.message = "Message sent at "+new Date()
