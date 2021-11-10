@@ -15,10 +15,12 @@ def springSecurityService
 
     }
     def confirmarContraseña(){
-
+        //obtener datos de logueado
         def principal = springSecurityService.principal
       String dui = principal.dui
+      //intancia usuario de usuario logueado
       def usuario=Usuario.findByDui(dui)
+      //verificar que contraseña y confirmar contraseña coinciden
         if(!params.password.equals(params.repassword)) {
             flash.message = "Las contraseñas no coinciden"
             redirect action: "index"

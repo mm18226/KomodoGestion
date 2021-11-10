@@ -23,19 +23,20 @@ class RegisterController {
 
     def register() {
         
-
+        //creacion de contraseña provisional
         contra=getPassword(MINUSCULAS+MAYUSCULAS+ESPECIALES,10)
-        
+        //creacion instancia usuario por dui dado en vista registro
         def usuario = Usuario.findByDui(params.dui)
         if(usuario.registrado==false){
             try {
-        
+        //asignacion de valores al usuario registrado
             user=usuario
             usuario.enabled=true
             usuario.password=contra
             usuario.correo=params.email
             usuario.telefono=params.telefono
             usuario.registrado=true
+            //llamado de funcion para enviar credenciales
             send()
         
                     UserRole.withSession {
@@ -47,12 +48,14 @@ class RegisterController {
         
  
 
-        } catch (ValidationException e) {
+        }//Registro fallido 
+        catch (ValidationException e) {
                 flash.message = "Register fallo, su dui no existe"
                 redirect action: "index"
                 return
             }
-        }else{
+        }//Usuario ya registrado
+        else{
             flash.message = "El dui de este usuario ya a sido registrado"
             redirect action: "index"
             return
@@ -152,7 +155,7 @@ class RegisterController {
 
   }
 
-
+//Enviar codigo A2F
   def sendCodigo(Usuario usuario) {
       String codigo=getPassword(MINUSCULAS+MAYUSCULAS+ESPECIALES,10)
       usuario.codigoA2F=codigo

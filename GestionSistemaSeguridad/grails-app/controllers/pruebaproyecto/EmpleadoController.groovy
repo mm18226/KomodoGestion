@@ -37,8 +37,9 @@ class EmpleadoController {
         }
 
         try {
+
             empleadoService.save(empleado) 
-            //aqui va 
+            //llama a funcion para crear usuario con datos del empleado registrado
             createUsuario(empleado)
         } catch (ValidationException e) {
             respond empleado.errors, view:'create'
